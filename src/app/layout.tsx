@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Manrope, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/header";
+import { LanguageProvider } from "@/contexts/language-context";
 import "./globals.css";
 
 const headingFont = Playfair_Display({
@@ -58,8 +59,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col font-sans font-normal">
-        <Header />
-        {children}
+        <LanguageProvider>
+          <Header />
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

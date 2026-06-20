@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { useLocale } from "@/contexts/language-context";
+import { t, getCategoryLabel, getModelLabel, getPaymentLabel, getPricingTierLabel, getChannelTypeLabel, getUrlStatusLabel } from "@/lib/i18n";
 import {
   ChevronDown,
   Brain,
@@ -164,6 +166,7 @@ export function FilterBar({
   urlStatusFilter,
   onUrlStatusChange,
 }: FilterBarProps) {
+  const { locale } = useLocale();
   const [advancedOpen, setAdvancedOpen] = useState(false);
 
   const advancedActive =
@@ -189,7 +192,7 @@ export function FilterBar({
               className="after:!bg-amber-600 dark:after:!bg-amber-500 text-[13px] px-3"
             >
               <Layers size={15} strokeWidth={1.5} />
-              全部
+              {t("filterAll", locale)}
               <span className="ml-1 font-mono text-[11px] tabular-nums opacity-50">
                 {Object.values(categoryCounts).reduce((a, b) => a + b, 0)}
               </span>
@@ -204,7 +207,7 @@ export function FilterBar({
                   className="after:!bg-amber-600 dark:after:!bg-amber-500 text-[13px] px-3"
                 >
                   <Icon size={15} strokeWidth={1.5} />
-                  {categoryLabels[cat]}
+                  {getCategoryLabel(cat, locale)}
                   <span className="ml-1 font-mono text-[11px] tabular-nums opacity-50">
                     {count}
                   </span>
@@ -220,7 +223,7 @@ export function FilterBar({
         {/* Model group */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[12px] font-medium text-muted-foreground/70 tracking-wide mr-0.5">
-            模型
+            {t("filterModel", locale)}
           </span>
           {(Object.keys(modelLabels) as ModelCategory[]).map((m) => {
             const Icon = modelIcons[m];
@@ -230,7 +233,7 @@ export function FilterBar({
                 active={modelFilter === m}
                 onClick={() => onModelChange(modelFilter === m ? null : m)}
                 icon={Icon}
-                label={modelLabels[m]}
+                label={getModelLabel(m, locale)}
                 count={modelCounts[m]}
               />
             );
@@ -240,7 +243,7 @@ export function FilterBar({
         {/* Payment group */}
         <div className="flex flex-wrap items-center gap-2">
           <span className="text-[12px] font-medium text-muted-foreground/70 tracking-wide mr-0.5">
-            付费
+            {t("filterPayment", locale)}
           </span>
           {(Object.keys(paymentLabels) as PaymentCategory[]).map((p) => {
             const Icon = paymentIcons[p];
@@ -250,7 +253,7 @@ export function FilterBar({
                 active={paymentFilter === p}
                 onClick={() => onPaymentChange(paymentFilter === p ? null : p)}
                 icon={Icon}
-                label={paymentLabels[p]}
+                label={getPaymentLabel(p, locale)}
                 count={paymentCounts[p]}
               />
             );
@@ -268,7 +271,7 @@ export function FilterBar({
               : "border-foreground/[0.04] bg-card text-muted-foreground hover:border-foreground/[0.08] hover:text-foreground"
           }`}
         >
-          高级筛选
+          {t("filterAdvanced", locale)}
           {advancedActive && (
             <span className="flex h-3.5 w-3.5 items-center justify-center rounded-full bg-amber-500 text-[9px] font-bold text-white tabular-nums">
               {(pricingTierFilter ? 1 : 0) +
@@ -290,7 +293,7 @@ export function FilterBar({
             {/* Pricing tier */}
             <div>
               <span className="text-[11px] font-semibold tracking-wide uppercase text-muted-foreground">
-                价格档位
+                {t("filterPricingTier", locale)}
               </span>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
                 {(Object.keys(pricingTierLabels) as PricingTier[]).map((pt) => {
@@ -310,7 +313,7 @@ export function FilterBar({
                       }`}
                     >
                       <Icon size={11} strokeWidth={1.5} />
-                      {pricingTierLabels[pt]}
+                      {getPricingTierLabel(pt, locale)}
                       <span className="font-mono text-[10px] tabular-nums opacity-50">
                         {count}
                       </span>
@@ -323,7 +326,7 @@ export function FilterBar({
             {/* Channel type */}
             <div>
               <span className="text-[11px] font-semibold tracking-wide uppercase text-muted-foreground">
-                渠道类型
+                {t("filterChannelType", locale)}
               </span>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
                 {(Object.keys(channelTypeLabels) as ChannelType[]).map((ct) => {
@@ -343,7 +346,7 @@ export function FilterBar({
                       }`}
                     >
                       <Icon size={11} strokeWidth={1.5} />
-                      {channelTypeLabels[ct]}
+                      {getChannelTypeLabel(ct, locale)}
                       <span className="font-mono text-[10px] tabular-nums opacity-50">
                         {count}
                       </span>
@@ -356,7 +359,7 @@ export function FilterBar({
             {/* URL status */}
             <div>
               <span className="text-[11px] font-semibold tracking-wide uppercase text-muted-foreground">
-                连接状态
+                {t("filterUrlStatus", locale)}
               </span>
               <div className="mt-2.5 flex flex-wrap gap-1.5">
                 {(Object.keys(urlStatusLabels) as UrlStatus[]).map((us) => {
@@ -376,7 +379,7 @@ export function FilterBar({
                       }`}
                     >
                       <Icon size={11} strokeWidth={1.5} />
-                      {urlStatusLabels[us]}
+                      {getUrlStatusLabel(us, locale)}
                       <span className="font-mono text-[10px] tabular-nums opacity-50">
                         {count}
                       </span>

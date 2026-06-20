@@ -1,13 +1,17 @@
 "use client";
 
-import { Search, GitFork, Layers } from "lucide-react";
+import { Search, GitFork, Layers, Languages } from "lucide-react";
 import Link from "next/link";
 import { ThemeToggle } from "@/components/theme-toggle";
+import { useLocale } from "@/contexts/language-context";
+import { t } from "@/lib/i18n";
 
 export function Header() {
+  const { locale, toggleLocale } = useLocale();
+
   return (
     <header className="glass-header sticky top-0 z-50 w-full">
-      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-6 lg:px-8">
+      <div className="mx-auto flex h-14 max-w-[1440px] items-center justify-between px-6 lg:px-10">
         {/* Logo */}
         <Link href="/" className="group flex items-center gap-3 no-underline">
           <span className="font-[family-name:var(--font-heading)] text-xl font-semibold tracking-tight text-foreground italic">
@@ -42,6 +46,14 @@ export function Header() {
             <span className="hidden sm:inline">GitHub</span>
           </a>
           <ThemeToggle />
+          <button
+            onClick={toggleLocale}
+            className="flex items-center gap-1 rounded-lg px-1.5 py-1 text-[12px] font-semibold tracking-wide text-muted-foreground transition-colors duration-200 hover:text-foreground"
+            aria-label="切换语言"
+          >
+            <Languages size={14} strokeWidth={1.5} />
+            <span className="tabular-nums">{locale === "zh" ? "EN" : "中"}</span>
+          </button>
           <div className="h-4 w-px bg-border" />
           <a
             href="https://apinav.cc/submit"

@@ -191,7 +191,7 @@ export const stations: ApiStation[] = [
     url: "https://shiyunapi.com",
     description: "价格低至官方 50%，99.8% 可用性，金融/政务合规，新用户送等值 20元",
     category: "enterprise",
-    tags: ["高性价比", "合规", "赠金"],
+    tags: ["合规", "赠金", "5折"],
     minDeposit: "¥10",
     payments: ["支付宝", "微信"],
     availability: 99.8,
@@ -1612,7 +1612,7 @@ export const stations: ApiStation[] = [
     url: "https://apinav.cc",
     description: "95.5% 可用率，￥1 起充，Anthropic / DeepSeek / Gemini 等 8 厂商",
     category: "apinav",
-    tags: ["高性价比", "8厂商"],
+    tags: ["超值", "8厂商"],
     availability: 95.5,
     urlStatus: "verified",
   },
@@ -2026,7 +2026,7 @@ export function getFeaturedStations(): ApiStation[] {
 
 export const categoryLabels: Record<StationCategory, string> = {
   enterprise: "企业级服务",
-  budget: "高性价比",
+  budget: "性价比优选",
   cloud: "官方云平台",
   community: "社区推荐",
   opensource: "开源/自建",

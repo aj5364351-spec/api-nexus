@@ -16,6 +16,8 @@ import { StationCard } from "@/components/station-card";
 import { StatsBar } from "@/components/stats-bar";
 import { FilterBar } from "@/components/filter-bar";
 import { ActiveFilters, type ActiveFilter } from "@/components/active-filters";
+import { useLocale } from "@/contexts/language-context";
+import { t } from "@/lib/i18n";
 import {
   getStationsByFilter,
   type StationCategory,
@@ -33,6 +35,8 @@ import {
 } from "@/data/api-stations";
 
 export default function Home() {
+  const { locale } = useLocale();
+
   // ─── State ───
   const [query, setQuery] = useState("");
   const [categoryFilter, setCategoryFilter] = useState<StationCategory | null>(null);
@@ -135,7 +139,7 @@ export default function Home() {
 
   return (
     <div className="grid-pattern flex-1">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8 pb-24">
+      <div className="mx-auto max-w-[1440px] px-6 lg:px-10 pb-24">
         {/* ═══════ Hero — Asymmetric ═══════ */}
         <section className="relative pt-16 pb-8 md:pt-24 md:pb-10">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-start">
@@ -143,16 +147,15 @@ export default function Home() {
             <div className="flex flex-col animate-enter">
               <span className="inline-flex items-center gap-2 rounded-full border border-foreground/[0.04] bg-card/60 px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-muted-foreground w-fit">
                 <Layers size={13} strokeWidth={1.5} />
-                API 接口索引
+                {t("heroBadge", locale)}
               </span>
 
               <h1 className="mt-6 font-[family-name:var(--font-heading)] text-[44px] leading-[1.08] tracking-tight text-foreground sm:text-[52px] md:text-[60px]">
-                API Hub
+                {t("heroTitle", locale)}
               </h1>
 
               <p className="mt-5 max-w-md text-[16px] leading-relaxed text-muted-foreground font-[family-name:var(--font-body)] font-normal">
-                按模型、渠道与价格分类，一站找到最适合的
-                Claude、GPT、Gemini 等大模型 API 接口。
+                {t("heroSubtitle", locale)}
               </p>
 
               {/* Search — left aligned */}
@@ -166,7 +169,7 @@ export default function Home() {
                     />
                     <Input
                       type="text"
-                      placeholder="搜索站点名称、描述、模型..."
+                      placeholder={t("heroSearchPlaceholder", locale)}
                       value={query}
                       onChange={(e) => setQuery(e.target.value)}
                       className="h-14 w-full rounded-2xl border border-foreground/[0.05] bg-card pl-11 pr-12 text-[15px] font-normal placeholder:text-muted-foreground/50 focus-visible:ring-1 focus-visible:ring-amber-500/30 focus-visible:ring-offset-0"
@@ -194,7 +197,7 @@ export default function Home() {
                     className="text-amber-600 dark:text-amber-500"
                   />
                   <span className="text-[12px] font-semibold tracking-wide uppercase text-muted-foreground">
-                    实时状态
+                    {locale === "zh" ? "实时状态" : "Live Status"}
                   </span>
                 </div>
                 <div className="space-y-3">
@@ -203,7 +206,7 @@ export default function Home() {
                       178+
                     </span>
                     <p className="mt-1 text-[13px] text-muted-foreground leading-snug">
-                      收录站点
+                      {locale === "zh" ? "收录站点" : "Listed Sites"}
                     </p>
                   </div>
                   <div>
@@ -211,13 +214,13 @@ export default function Home() {
                       7
                     </span>
                     <p className="mt-1 text-[13px] text-muted-foreground leading-snug">
-                      筛选维度
+                      {locale === "zh" ? "筛选维度" : "Filter Dimensions"}
                     </p>
                   </div>
                   <div className="flex items-center gap-2 pt-1">
                     <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                     <span className="text-[12px] text-muted-foreground">
-                      每日 URL 验证
+                      {locale === "zh" ? "每日 URL 验证" : "Daily URL Check"}
                     </span>
                   </div>
                 </div>
@@ -264,10 +267,11 @@ export default function Home() {
         <section className="mt-6 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <h2 className="font-[family-name:var(--font-heading)] text-[20px] font-medium tracking-tight text-foreground">
-              {hasActiveFilters ? "筛选结果" : "全部站点"}
+              {hasActiveFilters ? t("resultsFiltered", locale) : t("resultsAll", locale)}
             </h2>
             <span className="text-[13px] font-normal text-muted-foreground tabular-nums">
-              {filteredStations.length} 个
+              {filteredStations.length}
+              {locale === "zh" ? " 个" : ""}
             </span>
           </div>
 
@@ -329,10 +333,10 @@ export default function Home() {
                 />
               </div>
               <h3 className="font-[family-name:var(--font-heading)] text-[20px] font-medium text-foreground">
-                未找到匹配站点
+                {t("emptyTitle", locale)}
               </h3>
               <p className="mt-2 max-w-sm text-[14px] leading-relaxed text-muted-foreground font-normal">
-                尝试调整筛选条件或搜索关键词
+                {t("emptySubtitle", locale)}
               </p>
               {hasActiveFilters && (
                 <button
@@ -340,7 +344,7 @@ export default function Home() {
                   className="mt-5 inline-flex items-center gap-1.5 rounded-lg border border-amber-300/60 bg-amber-100/40 px-4 py-2 text-[13px] font-medium text-amber-800 transition-all duration-200 hover:bg-amber-100/60 dark:border-amber-700/40 dark:bg-amber-950/20 dark:text-amber-300 dark:hover:bg-amber-950/30"
                 >
                   <X size={13} strokeWidth={1.5} />
-                  清除所有筛选
+                  {t("emptyClearFilters", locale)}
                 </button>
               )}
             </div>
@@ -350,15 +354,14 @@ export default function Home() {
         {/* ═══════ Footer ═══════ */}
         <footer className="mt-20 border-t border-foreground/[0.04] pt-8 text-center">
           <p className="text-[13px] leading-relaxed font-normal text-muted-foreground">
-            API Nexus 仅做信息聚合。数据来源于公开信息与社区反馈（2026-06-20 更新）。
-            使用中转站前请自行验证服务质量。{" "}
+            {t("footerText", locale)}{" "}
             <a
               href="https://apinav.cc"
               target="_blank"
               rel="noopener noreferrer"
               className="text-amber-600 hover:text-amber-700 dark:text-amber-500 dark:hover:text-amber-400 underline underline-offset-2 transition-colors"
             >
-              完整数据源
+              {t("footerSource", locale)}
             </a>
           </p>
         </footer>

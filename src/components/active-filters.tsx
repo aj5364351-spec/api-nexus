@@ -1,6 +1,8 @@
 "use client";
 
 import { X, SlidersHorizontal } from "lucide-react";
+import { useLocale } from "@/contexts/language-context";
+import { t } from "@/lib/i18n";
 
 export interface ActiveFilter {
   key: string;
@@ -14,6 +16,7 @@ interface ActiveFiltersProps {
 }
 
 export function ActiveFilters({ filters, onClearAll }: ActiveFiltersProps) {
+  const { locale } = useLocale();
   if (filters.length === 0) return null;
 
   return (
@@ -24,7 +27,7 @@ export function ActiveFilters({ filters, onClearAll }: ActiveFiltersProps) {
         className="text-muted-foreground/60 shrink-0"
       />
       <span className="text-[12px] font-medium text-muted-foreground mr-1">
-        筛选条件
+        {t("activeFilters", locale)}
       </span>
       {filters.map((f) => (
         <span
@@ -45,7 +48,7 @@ export function ActiveFilters({ filters, onClearAll }: ActiveFiltersProps) {
         onClick={onClearAll}
         className="ml-1 text-[12px] font-medium text-muted-foreground/60 hover:text-foreground transition-colors duration-200"
       >
-        清除全部
+        {t("clearAll", locale)}
       </button>
     </div>
   );

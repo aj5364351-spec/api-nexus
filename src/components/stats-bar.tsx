@@ -31,7 +31,7 @@ const categoryIcons: Record<StationCategory, typeof Building2> = {
 
 const categoryShortLabels: Record<StationCategory, string> = {
   enterprise: "企业级",
-  budget: "高性价比",
+  budget: "性价比",
   cloud: "云平台",
   community: "社区",
   opensource: "开源",

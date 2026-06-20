@@ -353,3 +353,19 @@
   border-color: rgba(212, 160, 23, 0.3);
   box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.08);
 }
+
+/* ─── Tab 下划线平滑滑动 ─── */
+
+[data-slot="tabs-trigger"]::after {
+  transition: opacity 250ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 250ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+[data-slot="tabs-trigger"][data-active]::after {
+  transform: scaleX(1);
+}
+
+[data-slot="tabs-trigger"]:not([data-active])::after {
+  transform: scaleX(0);
+  opacity: 0;
+}
