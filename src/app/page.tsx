@@ -5,8 +5,6 @@ import {
   Search,
   X,
   Layers,
-  LayoutGrid,
-  List,
   SearchX,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -43,7 +41,6 @@ export default function Home() {
   const [pricingTierFilter, setPricingTierFilter] = useState<PricingTier | null>(null);
   const [channelTypeFilter, setChannelTypeFilter] = useState<ChannelType | null>(null);
   const [urlStatusFilter, setUrlStatusFilter] = useState<UrlStatus | null>(null);
-  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
 
   // ─── Filtered results ───
   const filteredStations = useMemo(
@@ -245,60 +242,24 @@ export default function Home() {
           />
         </section>
 
-        {/* ═══════ Results Header ═══════ */}
-        <section className="mt-6 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <h2 className="font-[family-name:var(--font-heading)] text-[20px] font-medium tracking-tight text-foreground">
-              {hasActiveFilters ? t("resultsFiltered", locale) : t("resultsAll", locale)}
-            </h2>
-            <span className="text-[13px] font-normal text-muted-foreground tabular-nums">
-              {filteredStations.length}
-              {locale === "zh" ? " 个" : ""}
-            </span>
-          </div>
-
-          {/* View toggle */}
-          <div className="flex items-center rounded-lg border border-foreground/[0.05] bg-card p-0.5">
-            <button
-              onClick={() => setViewMode("grid")}
-              className={`flex items-center justify-center rounded-md p-1.5 transition-all duration-200 ${
-                viewMode === "grid"
-                  ? "bg-muted/60 text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-              aria-label="网格视图"
-            >
-              <LayoutGrid size={15} strokeWidth={1.5} />
-            </button>
-            <button
-              onClick={() => setViewMode("list")}
-              className={`flex items-center justify-center rounded-md p-1.5 transition-all duration-200 ${
-                viewMode === "list"
-                  ? "bg-muted/60 text-foreground shadow-sm"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-              aria-label="列表视图"
-            >
-              <List size={15} strokeWidth={1.5} />
-            </button>
-          </div>
+        {/* ═══════ Section heading — "Latest releases" style ═══════ */}
+        <section className="mt-16">
+          <h2 className="font-sans text-[32px] font-bold leading-[1.1] tracking-[-0.02em] text-foreground sm:text-[40px]">
+            {hasActiveFilters ? t("resultsFiltered", locale) : t("resultsAll", locale)}
+          </h2>
+          <span className="mt-2 inline-block font-sans text-[16px] font-normal text-muted-foreground">
+            {filteredStations.length}{locale === "zh" ? " 个站点" : " stations"}
+          </span>
         </section>
 
-        {/* ═══════ Station Cards ═══════ */}
-        <section className="mt-4">
+        {/* ═══════ Station Cards — 3-column grid ═══════ */}
+        <section className="mt-8">
           {filteredStations.length > 0 ? (
-            <div
-              className={
-                viewMode === "grid"
-                  ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
-                  : "flex flex-col gap-3"
-              }
-            >
+            <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
               {filteredStations.map((station, i) => (
                 <StationCard
                   key={station.id}
                   station={station}
-                  layout={viewMode}
                   style={{
                     animationDelay: `${Math.min(i, 20) * 40}ms`,
                   }}
