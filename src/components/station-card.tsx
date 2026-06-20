@@ -189,11 +189,9 @@ export function StationCard({ station, layout = "grid", style }: StationCardProp
             {station.exchangeRate}
           </span>
         )}
-        {station.paymentCategory && (
-          <span className="inline-flex items-center rounded-md bg-muted/30 px-1.5 py-0.5 text-[11px] font-medium text-muted-foreground">
-            {station.paymentCategory === "高性价比" ? "高性价比" :
-             station.paymentCategory === "免费" ? "免费" :
-             station.paymentCategory === "按量" ? "按量" : "订阅"}
+        {(station.paymentCategory === "订阅" || (station.paymentCategory === "免费" && station.pricingTier !== "免费")) && (
+          <span className="inline-flex items-center rounded-md bg-violet-50/80 px-1.5 py-0.5 text-[11px] font-semibold text-violet-700 border border-violet-200/60 dark:bg-violet-950/20 dark:text-violet-400 dark:border-violet-800/30">
+            {station.paymentCategory === "订阅" ? "订阅制" : "免费"}
           </span>
         )}
       </div>
