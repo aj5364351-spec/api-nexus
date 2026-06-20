@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { useLocale } from "@/contexts/language-context";
 import { t, getCategoryLabel, getModelLabel, getPaymentLabel, getPricingTierLabel, getChannelTypeLabel, getUrlStatusLabel } from "@/lib/i18n";
 import {
@@ -168,6 +168,29 @@ export function FilterBar({
 }: FilterBarProps) {
   const { locale } = useLocale();
   const [advancedOpen, setAdvancedOpen] = useState(false);
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const [indicatorStyle, setIndicatorStyle] = useState({ left: 0, width: 0, opacity: 0 });
+
+  const updateIndicator = useCallback(() => {
+    const container = tabsRef.current;
+    if (!container) return;
+    const activeTab = container.querySelector('[data-active]') as HTMLElement;
+    if (!activeTab) { setIndicatorStyle(s => ({ ...s, opacity: 0 })); return; }
+    const containerRect = container.getBoundingClientRect();
+    const tabRect = activeTab.getBoundingClientRect();
+    setIndicatorStyle({
+      left: tabRect.left - containerRect.left,
+      width: tabRect.width,
+      opacity: 1,
+    });
+  }, []);
+
+  useEffect(() => {
+    updateIndicator();
+    // Also update on resize
+    window.addEventListener('resize', updateIndicator);
+    return () => window.removeEventListener('resize', updateIndicator);
+  }, [updateIndicator, categoryFilter]);
 
   const advancedActive =
     pricingTierFilter || channelTypeFilter || urlStatusFilter;
@@ -186,7 +209,8 @@ export function FilterBar({
             }
           }}
         >
-          <TabsList variant="line" className="w-full justify-start gap-0.5 overflow-x-auto">
+          <div className="relative">
+          <TabsList variant="line" className="w-full justify-start gap-0.5 overflow-x-auto" ref={tabsRef}>
             <TabsTrigger
               value="all"
               className="after:!bg-amber-600 dark:after:!bg-amber-500 text-[13px] px-3"
@@ -215,6 +239,18 @@ export function FilterBar({
               );
             })}
           </TabsList>
+          {/* Floating sliding indicator */}
+          <div
+            className="absolute bottom-0 h-0.5 rounded-full transition-all duration-300 ease-out pointer-events-none"
+            style={{
+              left: `${indicatorStyle.left}px`,
+              width: `${indicatorStyle.width}px`,
+              opacity: indicatorStyle.opacity,
+              backgroundColor: '#141413',
+              transform: 'translateY(5px)',
+            }}
+          />
+          </div>
         </Tabs>
       </div>
 
