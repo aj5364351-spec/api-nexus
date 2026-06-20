@@ -22,11 +22,14 @@ const monoFont = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "API Nexus — AI API 中转站导航",
+  title: "API Hub — AI API 接口导航",
   description:
-    "收录 178+ 个 AI API 中转站与代理平台。按模型（Claude/GPT/Gemini/DeepSeek）、渠道类型、价格档位多维度筛选，一站式发现大模型接口。",
+    "收录 178+ 个 AI API 接口与代理平台。按模型（Claude/GPT/Gemini/DeepSeek）、渠道类型、价格档位多维度筛选，一站式发现大模型接口。",
+  icons: {
+    icon: "/favicon.svg",
+  },
   keywords: [
-    "API中转",
+    "API Hub",
     "AI API",
     "Claude API",
     "OpenAI 代理",

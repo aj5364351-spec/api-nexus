@@ -143,14 +143,11 @@ export default function Home() {
             <div className="flex flex-col animate-enter">
               <span className="inline-flex items-center gap-2 rounded-full border border-foreground/[0.04] bg-card/60 px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-muted-foreground w-fit">
                 <Layers size={13} strokeWidth={1.5} />
-                API 中转站导航
+                API 接口索引
               </span>
 
               <h1 className="mt-6 font-[family-name:var(--font-heading)] text-[44px] leading-[1.08] tracking-tight text-foreground sm:text-[52px] md:text-[60px]">
-                发现
-                <span className="italic font-normal"> AI API </span>
-                <br />
-                中转服务
+                API Hub
               </h1>
 
               <p className="mt-5 max-w-md text-[16px] leading-relaxed text-muted-foreground font-[family-name:var(--font-body)] font-normal">

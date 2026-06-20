@@ -66,7 +66,7 @@
   --secondary: #f0ebe2;
   --secondary-foreground: #1c1917;
   --muted: #e8e3d9;
-  --muted-foreground: #8a8278;
+  --muted-foreground: #5e5a54;
   --accent: #fef3c7;
   --accent-foreground: #92400e;
   --destructive: #dc2626;
@@ -101,7 +101,7 @@
   --secondary: #141412;
   --secondary-foreground: #e8e6e1;
   --muted: #141412;
-  --muted-foreground: #787670;
+  --muted-foreground: #a09c96;
   --accent: #2d1b06;
   --accent-foreground: #f5deb3;
   --destructive: #dc2626;
@@ -128,7 +128,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-[17px] leading-relaxed;
     font-feature-settings: "ss01", "ss03", "cv02", "cv03";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
