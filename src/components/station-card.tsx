@@ -52,7 +52,7 @@ export function StationCard({ station, layout = "grid", style }: StationCardProp
         href={station.url}
         target="_blank"
         rel="noopener noreferrer"
-        className="shadow-card group flex items-center gap-4 rounded-2xl border border-foreground/[0.04] bg-card px-5 py-4 no-underline transition-all duration-300"
+        className="shadow-card group flex items-center gap-4 rounded-xl bg-card px-6 py-5 no-underline transition-all duration-200"
         style={style}
       >
         {/* Status dot */}
@@ -115,7 +115,7 @@ export function StationCard({ station, layout = "grid", style }: StationCardProp
       href={station.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="shadow-card group relative flex flex-col gap-3 rounded-2xl border border-foreground/[0.04] bg-card p-5 no-underline transition-all duration-300"
+      className="shadow-card group relative flex flex-col gap-4 rounded-xl bg-card p-6 no-underline transition-all duration-200"
       style={style}
     >
       {/* ── 右上角状态徽章 ── */}

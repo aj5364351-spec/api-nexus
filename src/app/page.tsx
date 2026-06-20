@@ -8,17 +8,15 @@ import {
   LayoutGrid,
   List,
   SearchX,
-  Activity,
-  ShieldCheck,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { StationCard } from "@/components/station-card";
-import { StatsBar } from "@/components/stats-bar";
 import { FilterBar } from "@/components/filter-bar";
 import { ActiveFilters, type ActiveFilter } from "@/components/active-filters";
 import { useLocale } from "@/contexts/language-context";
 import { t } from "@/lib/i18n";
 import {
+  stations,
   getStationsByFilter,
   type StationCategory,
   type ModelCategory,
@@ -138,107 +136,91 @@ export default function Home() {
   const hasActiveFilters = activeFilters.length > 0;
 
   return (
-    <div className="grid-pattern flex-1">
-      <div className="mx-auto max-w-[1440px] px-6 lg:px-10 pb-24">
-        {/* ═══════ Hero — Asymmetric ═══════ */}
-        <section className="relative pt-16 pb-8 md:pt-24 md:pb-10">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 lg:gap-16 items-start">
-            {/* Left zone: text + search */}
-            <div className="flex flex-col animate-enter">
-              <span className="inline-flex items-center gap-2 rounded-full border border-foreground/[0.04] bg-card/60 px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.12em] uppercase text-muted-foreground w-fit">
-                <Layers size={13} strokeWidth={1.5} />
-                {t("heroBadge", locale)}
-              </span>
+    <div className="flex-1">
+      <div className="mx-auto max-w-[1280px] px-8 lg:px-16 pb-24">
+        {/* ═══════ Hero — Anthropic-style ═══════ */}
+        <section className="relative pt-20 pb-16 md:pt-32 md:pb-20">
+          <div className="flex flex-col max-w-3xl">
+            <span className="inline-flex items-center gap-2 text-[13px] font-medium tracking-[0.15em] uppercase text-muted-foreground font-sans">
+              <Layers size={14} strokeWidth={1.5} />
+              {t("heroBadge", locale)}
+            </span>
 
-              <h1 className="mt-6 font-[family-name:var(--font-heading)] text-[44px] leading-[1.08] tracking-tight text-foreground sm:text-[52px] md:text-[60px]">
-                {t("heroTitle", locale)}
-              </h1>
+            <h1 className="mt-6 font-sans text-[48px] leading-[1.05] tracking-[-0.02em] font-bold text-foreground sm:text-[56px] md:text-[64px]">
+              {t("heroTitle", locale)}
+            </h1>
 
-              <p className="mt-5 max-w-md text-[16px] leading-relaxed text-muted-foreground font-[family-name:var(--font-body)] font-normal">
-                {t("heroSubtitle", locale)}
-              </p>
+            <p className="mt-6 max-w-xl text-[20px] leading-[1.5] text-muted-foreground font-normal" style={{fontFamily: "Georgia, 'Times New Roman', serif"}}>
+              {t("heroSubtitle", locale)}
+            </p>
 
-              {/* Search — left aligned */}
-              <div className="relative mt-6 w-full max-w-lg">
-                <div className="shadow-deep rounded-2xl">
-                  <div className="relative flex items-center">
-                    <Search
-                      size={18}
-                      strokeWidth={1.5}
-                      className="absolute left-4 text-muted-foreground pointer-events-none"
-                    />
-                    <Input
-                      type="text"
-                      placeholder={t("heroSearchPlaceholder", locale)}
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      className="h-14 w-full rounded-2xl border border-foreground/[0.05] bg-card pl-11 pr-12 text-[15px] font-normal placeholder:text-muted-foreground/50 focus-visible:ring-1 focus-visible:ring-amber-500/30 focus-visible:ring-offset-0"
-                    />
-                    {query && (
-                      <button
-                        onClick={() => setQuery("")}
-                        className="absolute right-4 rounded-full p-0.5 text-muted-foreground hover:text-foreground transition-colors duration-200"
-                      >
-                        <X size={15} strokeWidth={1.5} />
-                      </button>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Right zone: decorative stat card */}
-            <div className="hidden lg:flex flex-col items-end justify-start pt-2 animate-enter stagger-3">
-              <div className="rounded-2xl border border-foreground/[0.03] bg-card/40 p-6 shadow-deep w-full max-w-[280px]">
-                <div className="flex items-center gap-2 mb-4">
-                  <Activity
-                    size={15}
-                    strokeWidth={1.5}
-                    className="text-amber-600 dark:text-amber-500"
-                  />
-                  <span className="text-[12px] font-semibold tracking-wide uppercase text-muted-foreground">
-                    {locale === "zh" ? "实时状态" : "Live Status"}
-                  </span>
-                </div>
-                <div className="space-y-3">
-                  <div>
-                    <span className="font-[family-name:var(--font-heading)] text-[28px] font-semibold leading-none tabular-nums text-foreground">
-                      178+
-                    </span>
-                    <p className="mt-1 text-[13px] text-muted-foreground leading-snug">
-                      {locale === "zh" ? "收录站点" : "Listed Sites"}
-                    </p>
-                  </div>
-                  <div>
-                    <span className="font-[family-name:var(--font-heading)] text-[28px] font-semibold leading-none tabular-nums text-foreground">
-                      7
-                    </span>
-                    <p className="mt-1 text-[13px] text-muted-foreground leading-snug">
-                      {locale === "zh" ? "筛选维度" : "Filter Dimensions"}
-                    </p>
-                  </div>
-                  <div className="flex items-center gap-2 pt-1">
-                    <div className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-                    <span className="text-[12px] text-muted-foreground">
-                      {locale === "zh" ? "每日 URL 验证" : "Daily URL Check"}
-                    </span>
-                  </div>
-                </div>
+            {/* Search */}
+            <div className="relative mt-8 w-full max-w-xl">
+              <div className="relative flex items-center">
+                <Search size={20} strokeWidth={1.5} className="absolute left-5 text-muted-foreground pointer-events-none" />
+                <Input
+                  type="text"
+                  placeholder={t("heroSearchPlaceholder", locale)}
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="h-[52px] w-full rounded-lg border border-foreground/[0.08] bg-card pl-12 pr-12 text-[16px] font-normal placeholder:text-muted-foreground/60 focus-visible:ring-1 focus-visible:ring-foreground/20 focus-visible:ring-offset-0"
+                  style={{fontFamily: "Georgia, 'Times New Roman', serif"}}
+                />
+                {query && (
+                  <button onClick={() => setQuery("")} className="absolute right-4 rounded-full p-0.5 text-muted-foreground hover:text-foreground transition-colors duration-200">
+                    <X size={16} strokeWidth={1.5} />
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </section>
 
-        {/* ═══════ Stats Bar ═══════ */}
-        <section className="animate-enter stagger-4">
-          <StatsBar
-            activeCategory={categoryFilter}
-            onCategoryClick={setCategoryFilter}
-          />
+        {/* ═══════ Dark emphasis band — 关键数据 ═══════ */}
+        <section className="mt-16 -mx-8 lg:-mx-16 px-8 lg:px-16 py-16" style={{backgroundColor: '#141413'}}>
+          <div className="max-w-[1280px] mx-auto">
+            <span className="text-[11px] font-sans font-semibold tracking-[0.18em] uppercase" style={{color: '#87867f'}}>
+              {locale === "zh" ? "实时数据" : "Live Data"}
+            </span>
+            <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-8">
+              <div>
+                <span className="font-sans text-[48px] font-bold leading-none tabular-nums" style={{color: '#faf9f5'}}>
+                  {stations.length}
+                </span>
+                <p className="mt-2 text-[16px] leading-snug" style={{color: '#87867f', fontFamily: "Georgia, 'Times New Roman', serif"}}>
+                  {locale === "zh" ? "收录 API 站点" : "Listed API Sites"}
+                </p>
+              </div>
+              <div>
+                <span className="font-sans text-[48px] font-bold leading-none tabular-nums" style={{color: '#faf9f5'}}>
+                  {Math.round(stations.filter(s => s.urlStatus === "verified").length / stations.length * 100)}%
+                </span>
+                <p className="mt-2 text-[16px] leading-snug" style={{color: '#87867f', fontFamily: "Georgia, 'Times New Roman', serif"}}>
+                  {locale === "zh" ? "已验证存活" : "Verified Alive"}
+                </p>
+              </div>
+              <div>
+                <span className="font-sans text-[48px] font-bold leading-none tabular-nums" style={{color: '#faf9f5'}}>
+                  7
+                </span>
+                <p className="mt-2 text-[16px] leading-snug" style={{color: '#87867f', fontFamily: "Georgia, 'Times New Roman', serif"}}>
+                  {locale === "zh" ? "筛选维度" : "Filter Dimensions"}
+                </p>
+              </div>
+              <div>
+                <span className="font-sans text-[48px] font-bold leading-none tabular-nums" style={{color: '#faf9f5'}}>
+                  2026
+                </span>
+                <p className="mt-2 text-[16px] leading-snug" style={{color: '#87867f', fontFamily: "Georgia, 'Times New Roman', serif"}}>
+                  {locale === "zh" ? "数据年份" : "Data Year"}
+                </p>
+              </div>
+            </div>
+          </div>
         </section>
 
-        {/* ═══════ Filter Bar ═══════ */}
-        <section className="mt-6 animate-enter stagger-5">
+        {/* ═══════ Stats + Filter ═══════ */}
+        <section className="mt-16">
           <FilterBar
             categoryFilter={categoryFilter}
             onCategoryChange={setCategoryFilter}
@@ -308,7 +290,7 @@ export default function Home() {
             <div
               className={
                 viewMode === "grid"
-                  ? "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                  ? "grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
                   : "flex flex-col gap-3"
               }
             >

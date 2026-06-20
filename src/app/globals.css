@@ -48,79 +48,79 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-/* ─── API Nexus 美学色板 v2 ───
-   参考: apikey.fun (琥珀+灰调), aisuby.com (暖米白+Manrope)
-   米白 #f7f3ec | 暖卡 #faf8f4 | 深墨 #1c1917
-   点缀: 琥珀 #d97706 (apikey.fun同款)
+/* ─── Anthropic-inspired 美学色板 ───
+   象牙白 #faf9f5 → 暖灰 #f0eee6 → 燕麦 #e3dacc → 石板黑 #141413
+   点缀: 陶土 #d97757 (仅重点使用)
+   零阴影，纯靠色块对比
    ──────────────────────────── */
 
 :root {
-  --background: #f7f3ec;
-  --foreground: #1c1917;
-  --card: #faf8f4;
-  --card-foreground: #1c1917;
-  --popover: #faf8f4;
-  --popover-foreground: #1c1917;
-  --primary: #d97706;
-  --primary-foreground: #faf8f4;
-  --secondary: #f0ebe2;
-  --secondary-foreground: #1c1917;
-  --muted: #e8e3d9;
-  --muted-foreground: #484440;
-  --accent: #fef3c7;
-  --accent-foreground: #92400e;
-  --destructive: #dc2626;
-  --border: #1c191708;
-  --input: #1c191708;
-  --ring: #d9770640;
-  --chart-1: #d97706;
-  --chart-2: #0057ff;
-  --chart-3: #1c1917;
-  --chart-4: #8a8278;
-  --chart-5: #e8e3d9;
-  --radius: 0.75rem;
-  --sidebar: #f7f3ec;
-  --sidebar-foreground: #1c1917;
-  --sidebar-primary: #d97706;
-  --sidebar-primary-foreground: #faf8f4;
-  --sidebar-accent: #fef3c7;
-  --sidebar-accent-foreground: #92400e;
-  --sidebar-border: #1c191708;
-  --sidebar-ring: #d9770640;
+  --background: #faf9f5;
+  --foreground: #141413;
+  --card: #ffffff;
+  --card-foreground: #141413;
+  --popover: #ffffff;
+  --popover-foreground: #141413;
+  --primary: #141413;
+  --primary-foreground: #faf9f5;
+  --secondary: #f0eee6;
+  --secondary-foreground: #141413;
+  --muted: #f0eee6;
+  --muted-foreground: #5e5d59;
+  --accent: #e3dacc;
+  --accent-foreground: #141413;
+  --destructive: #c64545;
+  --border: #1414130d;
+  --input: #1414130d;
+  --ring: #14141320;
+  --chart-1: #141413;
+  --chart-2: #d97757;
+  --chart-3: #3d3d3a;
+  --chart-4: #87867f;
+  --chart-5: #e8e6dc;
+  --radius: 0.5rem;
+  --sidebar: #faf9f5;
+  --sidebar-foreground: #141413;
+  --sidebar-primary: #141413;
+  --sidebar-primary-foreground: #faf9f5;
+  --sidebar-accent: #f0eee6;
+  --sidebar-accent-foreground: #141413;
+  --sidebar-border: #1414130a;
+  --sidebar-ring: #14141320;
 }
 
 .dark {
-  --background: #080807;
-  --foreground: #e8e6e1;
-  --card: #0f0f0d;
-  --card-foreground: #e8e6e1;
-  --popover: #0f0f0d;
-  --popover-foreground: #e8e6e1;
-  --primary: #d4a017;
-  --primary-foreground: #080807;
-  --secondary: #141412;
-  --secondary-foreground: #e8e6e1;
-  --muted: #141412;
-  --muted-foreground: #b8b4ae;
-  --accent: #2d1b06;
-  --accent-foreground: #f5deb3;
-  --destructive: #dc2626;
-  --border: #ffffff06;
-  --input: #ffffff06;
-  --ring: #d4a01740;
-  --chart-1: #d4a017;
-  --chart-2: #0057ff;
-  --chart-3: #e8e6e1;
-  --chart-4: #787670;
-  --chart-5: #141412;
-  --sidebar: #080807;
-  --sidebar-foreground: #e8e6e1;
-  --sidebar-primary: #d4a017;
-  --sidebar-primary-foreground: #080807;
-  --sidebar-accent: #2d1b06;
-  --sidebar-accent-foreground: #f5deb3;
-  --sidebar-border: #ffffff06;
-  --sidebar-ring: #d4a01740;
+  --background: #141413;
+  --foreground: #faf9f5;
+  --card: #1f1e1b;
+  --card-foreground: #faf9f5;
+  --popover: #1f1e1b;
+  --popover-foreground: #faf9f5;
+  --primary: #faf9f5;
+  --primary-foreground: #141413;
+  --secondary: #1a1a18;
+  --secondary-foreground: #faf9f5;
+  --muted: #1a1a18;
+  --muted-foreground: #87867f;
+  --accent: #e3dacc;
+  --accent-foreground: #141413;
+  --destructive: #c64545;
+  --border: #ffffff0a;
+  --input: #ffffff0a;
+  --ring: #faf9f530;
+  --chart-1: #faf9f5;
+  --chart-2: #d97757;
+  --chart-3: #e3dacc;
+  --chart-4: #87867f;
+  --chart-5: #1a1a18;
+  --sidebar: #141413;
+  --sidebar-foreground: #faf9f5;
+  --sidebar-primary: #faf9f5;
+  --sidebar-primary-foreground: #141413;
+  --sidebar-accent: #f0eee6;
+  --sidebar-accent-foreground: #141413;
+  --sidebar-border: #ffffff0a;
+  --sidebar-ring: #faf9f530;
 }
 
 @layer base {
@@ -128,8 +128,11 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground text-[17px] leading-relaxed;
-    font-feature-settings: "ss01", "ss03", "cv02", "cv03";
+    @apply bg-background text-foreground;
+    font-family: Georgia, 'Times New Roman', serif;
+    font-size: 18px;
+    line-height: 1.6;
+    font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -187,44 +190,25 @@
 }
 
 .shadow-card {
-  box-shadow:
-    0 0 0 0 transparent,
-    0 1px 2px rgba(0,0,0,0.03),
-    0 2px 4px rgba(0,0,0,0.04),
-    0 4px 8px rgba(0,0,0,0.03);
-  transition: box-shadow 200ms cubic-bezier(0.22, 1, 0.36, 1),
-              transform 200ms cubic-bezier(0.22, 1, 0.36, 1),
+  box-shadow: none;
+  transition: background-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
               border-color 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  border: 1px solid rgba(20, 20, 19, 0.06);
 }
 
 .shadow-card:hover {
-  box-shadow:
-    0 0 0 0 transparent,
-    0 4px 8px rgba(0,0,0,0.06),
-    0 8px 20px rgba(0,0,0,0.08),
-    0 16px 40px rgba(0,0,0,0.06);
-  transform: translateY(-3px) scale(1.01);
-  border-color: rgba(217, 119, 6, 0.18);
+  background-color: #f5f2eb;
+  border-color: rgba(20, 20, 19, 0.12);
 }
 
 .dark .shadow-card {
-  box-shadow:
-    0 0 0 0 transparent,
-    0 1px 2px rgba(0,0,0,0.12),
-    0 2px 4px rgba(0,0,0,0.16),
-    0 4px 8px rgba(0,0,0,0.12),
-    0 0 0 0.5px rgba(212, 160, 23, 0.04);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .dark .shadow-card:hover {
-  box-shadow:
-    0 0 0 0 transparent,
-    0 4px 8px rgba(0,0,0,0.20),
-    0 8px 20px rgba(0,0,0,0.24),
-    0 16px 40px rgba(0,0,0,0.18),
-    0 0 0 1px rgba(212, 160, 23, 0.15);
-  transform: translateY(-3px) scale(1.01);
-  border-color: rgba(212, 160, 23, 0.2);
+  background-color: #252320;
+  border-color: rgba(255, 255, 255, 0.12);
 }
 
 /* ─── 自定义滚动条 ─── */

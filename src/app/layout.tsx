@@ -1,31 +1,12 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Manrope, Geist_Mono } from "next/font/google";
 import { Header } from "@/components/header";
 import { LanguageProvider } from "@/contexts/language-context";
 import "./globals.css";
 
-const headingFont = Playfair_Display({
-  variable: "--font-heading",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
-  style: ["normal", "italic"],
-});
-
-const bodyFont = Manrope({
-  variable: "--font-body",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
-});
-
-const monoFont = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
-  title: "API Hub — AI API 接口导航",
+  title: "API Hub — AI API Interface Index",
   description:
-    "收录 178+ 个 AI API 接口与代理平台。按模型（Claude/GPT/Gemini/DeepSeek）、渠道类型、价格档位多维度筛选，一站式发现大模型接口。",
+    "收录 178+ 个 AI API 接口与代理平台的开放索引。按模型、渠道、价格筛选 Claude、GPT、Gemini 等大模型接口。",
   icons: {
     icon: "/favicon.svg",
   },
@@ -33,10 +14,9 @@ export const metadata: Metadata = {
     "API Hub",
     "AI API",
     "Claude API",
-    "OpenAI 代理",
-    "大模型接口",
-    "中转站导航",
-    "API 聚合",
+    "OpenAI proxy",
+    "LLM interface",
+    "API index",
   ],
 };
 
@@ -49,7 +29,7 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${headingFont.variable} ${bodyFont.variable} ${monoFont.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <head>
         <script
@@ -58,7 +38,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col font-sans font-normal">
+      <body className="min-h-full flex flex-col">
         <LanguageProvider>
           <Header />
           {children}
