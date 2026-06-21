@@ -4,12 +4,19 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ─── 字体系统：对标 Anthropic 官网 ───
+   Anthropic Sans  → Arial（无衬线标题）
+   Anthropic Serif → Georgia（衬线正文）
+   Anthropic Mono  → Consolas（等宽标签）
+   所有字体均为系统自带，无需下载，全平台一致 ─── */
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-heading);
+  --font-sans: Arial, Helvetica, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Consolas', 'Courier New', 'JetBrains Mono', ui-monospace, monospace;
+  --font-heading: Arial, Helvetica, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', 'Noto Serif SC', serif;
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -129,15 +136,15 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: Georgia, 'Times New Roman', serif;
-    font-size: 18px;
-    line-height: 1.6;
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.55;
     font-weight: 400;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   html {
-    @apply font-sans;
+    font-family: var(--font-sans);
   }
 }
 
